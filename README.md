@@ -29,7 +29,7 @@ For getting a local environment up and running quickly I recommend MAMP or Node.
 Don't worry about it working in any environment other than localhost.
 
 
-Please fork the project, make your changes the "master" branch, and submit a pull request to this project when complete. Email me at jerry@jukinmedia.com if you get stuck or need hints, happy to clarify.
+Please fork the project, make your changes the "master" branch, and submit a pull request to this project when complete. Email me at mike.marshall@jukinmedia.com if you get stuck or need hints, happy to clarify.
 
 Thanks!
 =======================
