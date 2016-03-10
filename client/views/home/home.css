@@ -1,0 +1,11 @@
+.nav > li {
+    cursor:pointer;
+}
+
+.playlistThumbnail {
+    width: 60px;
+}
+
+.active {
+  background-color: lightsalmon;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jukin Video Playlists</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link href="vendor/bootstrap.css" rel="stylesheet">
+    <link href="views/home/home.css" rel="stylesheet">
+    <script src="vendor/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.6.1/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
+    <script src="module.js"></script>
+    <script src="AppController.js"></script>
+    <script src="constants/config.js"></script>
+    <script src="services/youtubeService.js"></script>
+    <script src="views/home/HomeController.js"></script>
+</head>
+<body ng-app="jukinApp" ng-controller="AppController as app">
+    <div ng-view></div>
+</body>
+</html>

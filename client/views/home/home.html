@@ -1,0 +1,53 @@
+<div class="container">
+    <h1>Jukin Video Playlists</h1>
+    <hr>
+
+    <div class="row">
+        <div class="col-md-4">
+            <ul class="nav">
+                <li ng-class="{active: home.selectedPlaylistIndex === $index}"ng-repeat="playlist in home.playlists">
+                    <a ng-click="home.loadPlaylistVideos(playlist.id, $index)">
+                      <div class="row">
+                          <div class="col-md-3">
+                              <img class="playlistThumbnail" src="{{playlist.thumbnail.url}}"/>
+                          </div>
+                          <div class="col-md-9">
+                              {{playlist.title}}
+                          </div>
+                      </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-8">
+            <div class="video-container">
+                <div class="row" ng-repeat="playlistRow in home.playlistVideos">
+                    <div class="col-md-4" ng-repeat="video in playlistRow">
+                        <a href="#" data-toggle="modal" data-target="#myModal"><img class="img-responsive" src="{{video.thumbnail.url}}" ng-click="home.loadVideo(video.videoId)"/></a>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">{{home.selectedVideo.title}}</h4>
+                            </div>
+                            <div class="modal-body">
+                                <iframe width="560" height="315" ng-src="{{home.selectedVideo.videoUrl}}" frameborder="0" allowfullscreen></iframe>
+                                <div class="yt-description">
+                                    <h4>{{home.selectedVideo.publishedAt}} <span class="pull-right">{{home.selectedVideo.viewCount}}</span></h4>
+                                    <p>{{home.selectedVideo.description}}</p>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
