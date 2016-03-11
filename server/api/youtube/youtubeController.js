@@ -61,7 +61,7 @@ exports.getPlaylistVideos = function(req, res) {
                 else {
                     return {
                       videoId: d["snippet"]["resourceId"]["videoId"],
-                      thumbnail: d["snippet"]["thumbnails"] ? d["snippet"]["thumbnails"]["high"] : defaultThumbnail
+                      thumbnail: d["snippet"]["thumbnails"]["high"]
                     };
                 }
             });
