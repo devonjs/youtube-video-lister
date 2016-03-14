@@ -22,9 +22,12 @@
     top: 150px;
 }
 
+.loadingPlaylistContainer {
+  position: relative;
+  text-align: center;
+}
 .loadingCirclesPlaylist {
     position: absolute;
-    left: 340px;
     top: 150px;
 }
 

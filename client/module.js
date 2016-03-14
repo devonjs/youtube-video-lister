@@ -1,7 +1,8 @@
 (function(){
     "use strict";
     var app = angular.module("jukinApp", [
-        "ngRoute"
+        "ngRoute",
+        "ngSanitize"
     ]);
     
     app.config(["$routeProvider", "$locationProvider", function($routeProvider, $locationProvider){

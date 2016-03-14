@@ -19,7 +19,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-md-8" ng-if="home.playlistLoading">
+        <div class="col-md-8 loadingPlaylistContainer" ng-if="home.playlistLoading">
             <img class="loadingCirclesPlaylist" src="assets/loading.gif"/>
         </div>
         <!-- ng-show is used here because we don't want the iframe element to be removed from the DOM, 
@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="yt-description">
                                     <h4>{{home.selectedVideo.publishedAt}} <span class="pull-right">{{home.selectedVideo.viewCount}}</span></h4>
-                                    <p>{{home.selectedVideo.description}}</p>
+                                    <p ng-bind-html="home.selectedVideo.description | linky: '_blank'"></p>
                                 </div>
                             </div>
                             <div class="modal-footer">
