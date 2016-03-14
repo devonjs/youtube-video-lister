@@ -37,41 +37,56 @@ exports.getPlaylists = function(req, res) {
 };
 
 exports.getPlaylistVideos = function(req, res) {
+    var totalItems = [];
+    var resData = [];
     var path = "/youtube/v3/playlistItems?part=snippet,status&playlistId=" + req.params.id + "&maxResults=" + maxResults + "&key=" + apiKey;
-    var options = {
-        hostname: "www.googleapis.com",
-        path: path,
-        method: 'GET'
+    
+    makeYoutubeRequest(path);
+    function nextPageRequest(pageToken) {
+        var nextPagePath = path + "&pageToken=" + pageToken;
+        makeYoutubeRequest(nextPagePath);
     };
     
-    var youtube_req = https.request(options, function(youtube_res) {
+    function makeYoutubeRequest(path) {
         var data = "";
-        var resData = [];
-
-        youtube_res.on("data", function(chunk) {
-            data += chunk;
-        });
+        var options = {
+            hostname: "www.googleapis.com",
+            path: path,
+            method: 'GET'
+        };
         
-        youtube_res.on("end", function() {
-            data = JSON.parse(data);
-            var resData = _.map(data.items, function(d) {
-                if(d.status.privacyStatus === "private") {
-                    return false;
-                }
-                else {
-                    return {
-                      videoId: d["snippet"]["resourceId"]["videoId"],
-                      thumbnail: d["snippet"]["thumbnails"]["high"]
-                    };
-                }
+        var youtube_req = https.request(options, function(youtube_res) {
+            youtube_res.on("data", function(chunk){
+                data += chunk;
             });
             
-            //Remove the private video placeholders
-            resData = _.compact(resData);
-            res.status(200).send(resData);
+            youtube_res.on("end", function() {
+                data = JSON.parse(data);
+                var filteredItems = _.map(data.items, function(d) {
+                    if(d.status.privacyStatus === "private" || d.snippet.title === "Deleted video") {
+                        return false;
+                    }
+                    else {
+                        return {
+                          videoId: d["snippet"]["resourceId"]["videoId"],
+                          thumbnail: d["snippet"]["thumbnails"]["high"]
+                        };
+                    }
+                });
+                
+                resData = _.concat(resData, filteredItems);
+                if(data.nextPageToken) {
+                    nextPageRequest(data.nextPageToken);
+                }
+                
+                else {
+                  resData = _.compact(resData);
+                  res.status(200).send(resData);
+                }
+            });
         });
-    });
-    youtube_req.end();
+        youtube_req.end();
+    }
 };
 
 exports.getVideo = function(req, res) {
