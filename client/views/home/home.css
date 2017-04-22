@@ -1,0 +1,50 @@
+.nav > li {
+    cursor:pointer;
+}
+
+.playlistThumbnail {
+    width: 60px;
+}
+
+.active {
+    background-color: lightsalmon;
+}
+
+.youtubePlayerPlaceholder {
+    height: 315px;
+    width: 560px;
+    position: relative;
+}
+
+.loadingCircles {
+    position: absolute;
+    left: 215px;
+    top: 150px;
+}
+
+.loadingPlaylistContainer {
+  position: relative;
+  text-align: center;
+}
+.loadingCirclesPlaylist {
+    position: absolute;
+    top: 150px;
+}
+
+.dim:after {
+  content: " ";
+  z-index: 10;
+  display: block;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.20);
+}
+
+@media screen and (max-width: 990px) {
+    .playlistTitle {
+        margin-top: 10px;
+    }
+}

@@ -1,0 +1,65 @@
+<div class="container">
+    <h1>Jukin Video Playlists</h1>
+    <hr>
+
+    <div class="row">
+        <div class="col-md-4" ng-class="{dim: home.playlistLoading}">
+            <ul class="nav">
+                <li ng-class="{active: home.selectedPlaylistIndex === $index}"ng-repeat="playlist in home.playlists">
+                    <a ng-click="home.loadPlaylistVideos(playlist.id, $index)">
+                      <div class="row">
+                          <div class="col-xs-2 col-sm-2 col-md-3">
+                              <img class="playlistThumbnail" src="{{playlist.thumbnail.url}}"/>
+                          </div>
+                          <div class="col-xs-10 col-sm-10 col-md-9 playlistTitle">
+                              {{playlist.title}}
+                          </div>
+                      </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-8 loadingPlaylistContainer" ng-if="home.playlistLoading">
+            <img class="loadingCirclesPlaylist" src="assets/loading.gif"/>
+        </div>
+        <!-- ng-show is used here because we don't want the iframe element to be removed from the DOM, 
+        causes issues with calling YouTube object methods -->
+        <div class="col-md-8" ng-show="!home.playlistLoading">
+            <div class="video-container">
+                <div class="row" ng-repeat="playlistRow in home.playlistVideos">
+                    <div class="col-md-4" ng-repeat="video in playlistRow">
+                        <a href="#" data-toggle="modal" data-target="#myModal"><img class="img-responsive" src="{{video.thumbnail.url}}" ng-click="home.loadVideo(video.videoId)"/></a>
+                        <br>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">{{home.selectedVideo.title}}</h4>
+                            </div>
+                            <div class="modal-body">
+                                <!-- ng-show is used here because we don't want the iframe element to be removed from the DOM, 
+                                causes issues with calling YouTube object methods -->
+                                <iframe ng-show="home.playerLoaded" id="youtubePlayer" width="560" height="315" src="{{home.selectedVideo.videoUrl}}" frameborder="0" allowfullscreen></iframe>
+                                
+                                <div class="youtubePlayerPlaceholder" ng-if="!home.playerLoaded">
+                                  <img class="loadingCircles" src="assets/loading.gif"/>
+                                </div>
+                                <div class="yt-description">
+                                    <h4>{{home.selectedVideo.publishedAt}} <span class="pull-right">{{home.selectedVideo.viewCount}}</span></h4>
+                                    <p ng-bind-html="home.selectedVideo.description | linky: '_blank'"></p>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
