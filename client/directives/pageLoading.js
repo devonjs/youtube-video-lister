@@ -20,6 +20,7 @@
                 const intervalID = setInterval(() => {
                     rootElement.style.top = `${currentPos += 10}px`
                     if (animationComplete()) {
+                        clearInterval(intervalID)
                         resolve(true)
                     }
                 }, 1)
