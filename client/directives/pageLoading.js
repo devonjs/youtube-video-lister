@@ -55,7 +55,6 @@
                         if (newValue === false) {
                             announceLoadFinished(elem.context.firstElementChild).then( () => {
                                 scope.shouldCloak = false
-                                elem.toggleClass("invisible")
                             })
                         }
                     })
