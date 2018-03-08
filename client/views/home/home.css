@@ -48,3 +48,26 @@
         margin-top: 10px;
     }
 }
+
+.body-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255, 0.95);
+    z-index: 99;
+}
+
+.body-overlay > div {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    text-align: center;
+    margin: 0 auto;
+    transform: translate(-50%, -50%);
+}
+
+.invisible {
+    display: none;
+}

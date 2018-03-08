@@ -19,9 +19,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-md-8 loadingPlaylistContainer" ng-if="home.playlistLoading">
-            <img class="loadingCirclesPlaylist" src="assets/loading.gif"/>
-        </div>
+        <page-loading></page-loading>
         <!-- ng-show is used here because we don't want the iframe element to be removed from the DOM, 
         causes issues with calling YouTube object methods -->
         <div class="col-md-8" ng-show="!home.playlistLoading">
